@@ -1,6 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 import classes from "./event-item.module.css";
+import Button from "../../ui/button/button";
+import DateIcon from "../icons/date-icon";
+import AddressIcon from "../icons/address-icon";
+import ArrowRightIcon from "../icons/arrow-right-icon";
 function EventItem(props) {
   const { title, image, date, location, id } = props;
   const humanReadableDate = new Date(date).toLocaleDateString("en-US", {
@@ -12,16 +15,23 @@ function EventItem(props) {
   return (
     <li className={classes.item}>
       <Image src={"/" + image} alt={title} width={250} height={160} />
-      <div>
+      <div className={classes.content}>
         <h2>{title}</h2>
         <div className={classes.date}>
+          <DateIcon />
           <time>{humanReadableDate}</time>
         </div>
         <div className={classes.address}>
+          <AddressIcon />
           <address>{formattedAddress}</address>
         </div>
         <div className={classes.actions}>
-          <Link href={`/events/${id}`}>Explore Event</Link>
+          <Button link={`/events/${id}`}>
+            <span>Explore Event</span>
+            <span className={classes.icon}>
+              <ArrowRightIcon />
+            </span>
+          </Button>
         </div>
       </div>
     </li>
